@@ -1,0 +1,107 @@
+{
+  "adult": false,
+  "backdrop_path": "/4g5gK5eGWZg8swIZl6eX2AoJp8S.jpg",
+  "created_by": [
+    {
+      "id": 1238142,
+      "credit_id": "5d29d20ebe4b36756aa15541",
+      "name": "Julio Jiménez",
+      "gender": 2,
+      "profile_path": null
+    }
+  ],
+  "episode_run_time": [
+    42
+  ],
+  "first_air_date": "2003-10-21",
+  "genres": [
+    {
+      "id": 18,
+      "name": "Drama"
+    }
+  ],
+  "homepage": "https://www.telemundo.com/shows/pasion-de-gavilanes",
+  "id": 11250,
+  "in_production": true,
+  "languages": [
+    "es"
+  ],
+  "last_air_date": "2022-03-11",
+  "last_episode_to_air": {
+    "air_date": "2022-03-11",
+    "episode_number": 19,
+    "id": 3577909,
+    "name": "",
+    "overview": "",
+    "production_code": "",
+    "season_number": 2,
+    "still_path": null,
+    "vote_average": 0.0,
+    "vote_count": 0
+  },
+  "name": "Pasión de gavilanes",
+  "next_episode_to_air": {
+    "air_date": "2022-03-14",
+    "episode_number": 20,
+    "id": 3577910,
+    "name": "",
+    "overview": "",
+    "production_code": "",
+    "season_number": 2,
+    "still_path": null,
+    "vote_average": 0.0,
+    "vote_count": 0
+  },
+  "networks": [
+    {
+      "name": "Telemundo",
+      "id": 193,
+      "logo_path": "/mieMBXx82qgY8nmnyaH0rY2D943.png",
+      "origin_country": "US"
+    }
+  ],
+  "number_of_episodes": 208,
+  "number_of_seasons": 2,
+  "origin_country": [
+    "CO"
+  ],
+  "original_language": "es",
+  "original_name": "Pasión de gavilanes",
+  "overview": "The Reyes-Elizondo's idyllic lives are shattered by a murder charge against Eric and León.",
+  "popularity": 2262.208,
+  "poster_path": "/lWlsZIsrGVWHtBeoOeLxIKDd9uy.jpg",
+  "production_companies": [],
+  "production_countries": [],
+  "seasons": [
+    {
+      "air_date": "2003-10-21",
+      "episode_count": 188,
+      "id": 72643,
+      "name": "Season 1",
+      "overview": "",
+      "poster_path": "/elrDXqvMIX3EcExwCenQMVVmnvd.jpg",
+      "season_number": 1
+    },
+    {
+      "air_date": "2022-02-14",
+      "episode_count": 20,
+      "id": 217607,
+      "name": "Season 2",
+      "overview": "",
+      "poster_path": "/lWlsZIsrGVWHtBeoOeLxIKDd9uy.jpg",
+      "season_number": 2
+    }
+  ],
+  "spoken_languages": [
+    {
+      "english_name": "Spanish",
+      "iso_639_1": "es",
+      "name": "Español"
+    }
+  ],
+  "status": "Returning Series",
+  "tagline": "",
+  "type": "Scripted",
+  "vote_average": 7.7,
+  "vote_count": 1733
+}

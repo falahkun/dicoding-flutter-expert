@@ -1,0 +1,1 @@
+export 'movie_card_list.dart';
