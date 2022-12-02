@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/movie.dart';
+import 'package:core/core.dart';
 
 class MovieCard extends StatelessWidget {
   final Movie movie;
@@ -15,18 +16,16 @@ class MovieCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 4),
       child: InkWell(
-        onTap: () {
-          Navigator.pushNamed(
-            context,
-            NamedRoutes.movieDetail,
-            arguments: movie.id,
-          );
-        },
+        onTap: () => context.pushNamed(
+          NamedRoutes.movieDetail,
+          arguments: movie.id,
+        ),
         child: Stack(
           alignment: Alignment.bottomLeft,
           children: [
             Card(
               child: Container(
+                width: double.maxFinite,
                 margin: const EdgeInsets.only(
                   left: 16 + 80 + 16,
                   bottom: 8,
@@ -64,7 +63,9 @@ class MovieCard extends StatelessWidget {
                   placeholder: (context, url) => const Center(
                     child: CircularProgressIndicator(),
                   ),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                  errorWidget: (context, url, error) => const Icon(
+                    Icons.error,
+                  ),
                 ),
               ),
             ),

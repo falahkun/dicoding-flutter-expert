@@ -19,13 +19,13 @@ Route routes(RouteSettings settings) {
         builder: (_) => MovieDetailPage(id: id),
         settings: settings,
       );
-  //   case SearchPage.ROUTE_NAME:
-  //     return CupertinoPageRoute(builder: (_) => SearchPage());
-  //   case WatchlistPage.ROUTE_NAME:
-  //     return MaterialPageRoute(builder: (_) => WatchlistPage());
-  //   case AboutPage.ROUTE_NAME:
-  //     return MaterialPageRoute(builder: (_) => AboutPage());
-  // //tv
+    case NamedRoutes.search:
+      return CupertinoPageRoute(builder: (_) => SearchPage());
+    case NamedRoutes.watchlist:
+      return MaterialPageRoute(builder: (_) => WatchlistPage());
+    case NamedRoutes.about:
+      return MaterialPageRoute(builder: (_) => AboutPage());
+  //tv
     case NamedRoutes.tvDetail:
       final id = settings.arguments as int;
       return MaterialPageRoute(builder: (_) => TvDetailPage(id: id));

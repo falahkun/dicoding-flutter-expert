@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:movie/movie.dart';
 import 'package:tv/tv.dart';
+import 'package:core/core.dart';
 
 class HomePage extends StatefulWidget {
   final int? initialPage;
@@ -13,10 +16,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int initialPage = 0;
+  final _key = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+    AnalyticsHelper.log('HomePage');
     setState(() {
       initialPage = widget.initialPage!;
     });
@@ -24,37 +29,48 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    String path = 'assets';
+    if (Platform.environment.containsKey('FLUTTER_TEST')) {
+      path = '../../assets';
+    }
     return Scaffold(
+      key: _key,
       drawer: Drawer(
         child: Column(
           children: [
-            const UserAccountsDrawerHeader(
+             UserAccountsDrawerHeader(
               currentAccountPicture: CircleAvatar(
-                backgroundImage: AssetImage('assets/circle-g.png'),
+                backgroundImage: AssetImage('$path/circle-g.png'),
               ),
-              accountName: Text('Ditonton'),
-              accountEmail: Text('ditonton@dicoding.com'),
+              accountName: const Text('Ditonton'),
+              accountEmail: const Text('ditonton@dicoding.com'),
             ),
             ListTile(
+              key: Key('tap_movie'),
               leading: const Icon(Icons.movie),
               title: const Text('Movies'),
               onTap: () => changeHomeView(0),
             ),
             ListTile(
+              key: Key('tap_tv'),
               leading: const Icon(Icons.tv),
               title: const Text('TV'),
               onTap: () => changeHomeView(1),
             ),
             ListTile(
+              key: Key('to_watchlist'),
               leading: const Icon(Icons.save_alt),
               title: const Text('Watchlist'),
               onTap: () {
-                // Navigator.pushNamed(context, WatchlistPage.ROUTE_NAME);
+                context.pushNamed(NamedRoutes.watchlist);
+                // Navigator.pushNamed(context, NamedRoutes.watchlist);
               },
             ),
             ListTile(
+              key: Key('to_about'),
               onTap: () {
-                // Navigator.pushNamed(context, AboutPage.ROUTE_NAME);
+                context.pushNamed(NamedRoutes.about);
+                // Navigator.pushNamed(context, NamedRoutes.about);
               },
               leading: const Icon(Icons.info_outline),
               title: const Text('About'),
@@ -64,10 +80,17 @@ class _HomePageState extends State<HomePage> {
       ),
       appBar: AppBar(
         title: const Text('Ditonton'),
+        leading: IconButton(
+            key: Key('leading-icon'),
+            onPressed: () {
+              _key.currentState?.openDrawer();
+            },
+            icon: Icon(Icons.menu)),
         actions: [
           IconButton(
             onPressed: () {
-              // Navigator.pushNamed(context, SearchPage.ROUTE_NAME);
+              context.pushNamed(NamedRoutes.search);
+              // Navigator.pushNamed(context, NamedRoutes.search);
             },
             icon: const Icon(Icons.search),
           )
@@ -84,6 +107,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   void changeHomeView(int selectedPage) {
+    AnalyticsHelper.log(
+        'changeHomeView', 'onChange(old: $initialPage, next: $selectedPage)');
     setState(() {
       initialPage = selectedPage;
     });

@@ -122,10 +122,12 @@ class DetailContent extends StatelessWidget {
                             ElevatedButton(
                               onPressed: () async {
                                 if (!isAddedWatchlist) {
+                                  AnalyticsHelper.log('SaveMovieToWatchlist', movie);
                                   context
                                       .read<WatchlistMovieBloc>()
                                       .add(SaveMovieToWatchlist(movie));
                                 } else {
+                                  AnalyticsHelper.log('RemoveMovieFromWatchlist', movie);
                                   context
                                       .read<WatchlistMovieBloc>()
                                       .add(RemoveMovieFromWatchlist(movie));

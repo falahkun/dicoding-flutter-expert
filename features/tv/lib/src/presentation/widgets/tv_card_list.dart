@@ -13,18 +13,16 @@ class TvCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 4),
       child: InkWell(
-        onTap: () {
-          Navigator.pushNamed(
-            context,
-            NamedRoutes.tvDetail,
-            arguments: tv.id,
-          );
-        },
+        onTap: () => context.pushNamed(
+          NamedRoutes.tvDetail,
+          arguments: tv.id,
+        ),
         child: Stack(
           alignment: Alignment.bottomLeft,
           children: [
             Card(
               child: Container(
+                width: double.maxFinite,
                 margin: const EdgeInsets.only(
                   left: 16 + 80 + 16,
                   bottom: 8,
@@ -61,9 +59,13 @@ class TvCard extends StatelessWidget {
                   placeholder: (context, url) => Center(
                     child: CircularProgressIndicator(),
                   ),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
+                  errorWidget: (context, url, error) => Icon(
+                    Icons.error,
+                  ),
                 ),
-                borderRadius: BorderRadius.all(Radius.circular(8)),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(8),
+                ),
               ),
             ),
           ],

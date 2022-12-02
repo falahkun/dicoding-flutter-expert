@@ -13,9 +13,14 @@ class _FragmentTvState extends State<FragmentTv> {
   @override
   void initState() {
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
     context.read<TvNowPlayingBloc>().add(GetTvNowPlaying());
     context.read<TvPopularBloc>().add(GetTvPopularEvent());
     context.read<TvTopRatedBloc>().add(GetTvTopRatedEvent());
+    super.didChangeDependencies();
   }
 
   @override

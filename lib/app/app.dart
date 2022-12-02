@@ -3,6 +3,7 @@ import 'package:ditonton/app/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:home/home.dart';
 import 'package:movie/movie.dart';
 import 'package:tv/tv.dart';
 
@@ -55,6 +56,8 @@ class App extends StatelessWidget {
         BlocProvider(
           create: (context) => GetIt.I<WatchlistTvBloc>(),
         ),
+        BlocProvider(create: (_) => GetIt.I<SearchBloc>()),
+        BlocProvider(create: (_) => GetIt.I<WatchlistBloc>()),
       ],
       child: _App(),
     );
@@ -67,6 +70,16 @@ class _App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        builder: (BuildContext context, Widget? widget) {
+          ErrorWidget.builder = (FlutterErrorDetails errorDetails) {
+            return ErrorPage(
+              error: errorDetails.exception,
+              stackTrace: errorDetails.stack,
+            );
+          };
+
+          return widget!;
+        },
         theme: ThemeData.dark().copyWith(
           colorScheme: kColorScheme,
           primaryColor: kRichBlack,

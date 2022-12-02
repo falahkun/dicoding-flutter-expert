@@ -5,7 +5,6 @@ import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/movie.dart';
-import 'package:movie/src/presentation/blocs/blocs.dart';
 
 class FragmentMovie extends StatefulWidget {
   const FragmentMovie({Key? key}) : super(key: key);

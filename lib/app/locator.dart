@@ -1,14 +1,37 @@
+import 'dart:io';
+
 import 'package:core/core.dart';
 import 'package:get_it/get_it.dart';
+import 'package:home/home.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/io_client.dart';
 import 'package:movie/movie.dart';
 import 'package:tv/tv.dart';
+import 'package:core/core.dart';
 
 final getIt = GetIt.instance;
 
 Future<void> setUpLocator() async {
   // setUp core
   await _setUpCore();
+
+  // [HOME]
+
+  // Data
+  // Domain
+  // presentation
+  getIt.registerFactory(
+    () => SearchBloc(
+      tvUseCase: getIt(),
+      searchMovies: getIt(),
+    ),
+  );
+  getIt.registerFactory(
+    () => WatchlistBloc(
+      getWatchlistMovies: getIt(),
+      tvUseCase: getIt(),
+    ),
+  );
 
   // [Tv]
 
@@ -79,5 +102,9 @@ Future<void> setUpLocator() async {
 
 Future<void> _setUpCore() async {
   getIt.registerFactory<DatabaseHelper>(() => DatabaseHelper());
-  getIt.registerFactory<http.Client>(() => http.Client());
+  HttpClient client = HttpClient(context: await globalContext);
+  client.badCertificateCallback =
+      (X509Certificate cert, String host, int port) => false;
+  IOClient ioClient = IOClient(client);
+  getIt.registerFactory<http.Client>(() => ioClient);
 }

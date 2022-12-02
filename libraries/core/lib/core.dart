@@ -9,3 +9,5 @@ export 'src/data/data.dart';
 export 'src/named_routes.dart';
 export 'src/helpers/helpers.dart';
 export 'src/domain/domain.dart';
+export 'src/presentation/presentation.dart';
+export 'src/extensions/extensions.dart';
