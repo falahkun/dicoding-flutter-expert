@@ -6,22 +6,20 @@ stages:
 get_dependency:
   stage: testing
   script:
+    - cd ./libraries/dependencies && flutter pub get
+    - cd ./libraries/core && flutter pub get
+    - cd ./features/home && flutter pub get
+    - cd ./features/movie && flutter pub get
+    - cd ./features/tv && flutter pub get
     - flutter pub get
-
-analyze:
-  stage: testing
-  script:
-    - flutter pub get
-    - flutter analyze lib test
-
-format:
-  stage: testing
-  script:
-    - flutter pub get
-    - flutter format --set-exit-if-changed lib test
 
 unit_test:
   stage: testing
   script:
+    - cd ./libraries/dependencies && flutter pub get
+    - cd ./libraries/core && flutter pub get
+    - cd ./features/home && flutter pub get
+    - cd ./features/movie && flutter pub get
+    - cd ./features/tv && flutter pub get
     - flutter pub get
-    - flutter test --no-pub --coverage --test-randomize-ordering-seed random
+    - ./test.sh
