@@ -46,10 +46,11 @@ runTests () {
 
 runReport() {
     if [ -f "coverage/lcov.info" ] && ! [ "$TRAVIS" ]; then
-        PATH_COVERAGE=$1
         MIN_COVERAGE_PERC=80
+        cd $1
+        PATH="${pwd}/coverage/lcov.info"
 
-        percentageRate=$(lcov --summary "$PATH_COVERAGE" | grep "lines......" | cut -d ' ' -f 4 | cut -d '%' -f 1)
+        percentageRate=$(lcov --summary "$PATH" | grep "lines......" | cut -d ' ' -f 4 | cut -d '%' -f 1)
         
         echo percentageRate
         pwd
