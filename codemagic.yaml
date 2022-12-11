@@ -1,0 +1,44 @@
+workflows:
+  android:
+    name: build, test & publish Android version
+    environment:
+      flutter: stable
+    scripts:
+      - cd ./libraries/dependencies && flutter pub get
+      - cd ./libraries/core && flutter pub get
+      - cd ./features/home && flutter pub get
+      - cd ./features/movie && flutter pub get
+      - cd ./features/tv && flutter pub get
+      - flutter pub get
+      - flutter build apk --release
+    artifacts: 
+      - build/**/outputs/**/*.apk
+    publishing:
+      email:
+        recipients:
+          - izumi@falahid.com
+        notify:
+          success: true
+          failure: true
+
+  ios:
+    name: build, test & publish iOS version
+    environment:
+      flutter: stable
+    scripts:
+      - cd ./libraries/dependencies && flutter pub get
+      - cd ./libraries/core && flutter pub get
+      - cd ./features/home && flutter pub get
+      - cd ./features/movie && flutter pub get
+      - cd ./features/tv && flutter pub get
+      - flutter pub get
+      - flutter build ipa --release
+    artifacts: 
+      - build/**/outputs/**/*.ipa
+    publishing:
+      email:
+        recipients:
+          - izumi@falahid.com
+        notify:
+          success: true
+          failure: true
