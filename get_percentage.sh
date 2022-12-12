@@ -50,7 +50,7 @@ runReport() {
         cd $1
         PATH="${pwd}/coverage/lcov.info"
 
-        percentageRate=$(lcov --summary "$PATH" | grep "lines......" | cut -d ' ' -f 4 | cut -d '%' -f 1)
+        percentageRate=$(lcov --list "$PATH" | sed -n "s/.*Total:|\(.*\)%.*/\1/p")
         
         echo percentageRate
         pwd
