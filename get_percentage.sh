@@ -93,6 +93,7 @@ case $1 in
                 show_help
             fi
         fi
+           exit 1
 #         runReport
         ;;
 esac
