@@ -93,7 +93,7 @@ case $1 in
                 show_help
             fi
         fi
-        runReport
+#         runReport
         ;;
 esac
 
