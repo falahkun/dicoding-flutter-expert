@@ -50,9 +50,12 @@ runReport() {
         cd $1
         PATH="${pwd}/coverage/lcov.info"
 
+        echo $PATH
+        echo $(lcov --summary "$PATH")
+
         percentageRate=$(lcov --summary "$PATH" | grep "lines......" | cut -d ' ' -f 4 | cut -d '%' -f 1)
         
-        echo percentageRate
+        echo $percentageRate
         pwd
 
         RED='\033[0;31m'
@@ -93,7 +96,7 @@ case $1 in
                 show_help
             fi
         fi
-        runReport
+        exit 0
         ;;
 esac
 

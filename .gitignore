@@ -30,6 +30,14 @@
 .pub-cache/
 .pub/
 /build/
+/coverage
+features/**/coverage/*
+features/**/build/*
+features/**/.dart_tool
+features/**/.flutter-plugins
+features/**/.flutter-plugins-dependencies
+features/**/.pubspec.lock
+
 
 # Web related
 lib/generated_plugin_registrant.dart
