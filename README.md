@@ -6,6 +6,7 @@
 ## Screenshot CI & Firebase
 
 | CI Codemagic | Firebase |
+|--------------|----------|
 |![ss_ci](./screenshot/ss_ci.png)|![ss_firebase](./screenshot/ss_firebase.png)|
 
 
