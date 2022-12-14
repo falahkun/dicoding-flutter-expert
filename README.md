@@ -3,6 +3,13 @@
 [![Codemagic build status](https://api.codemagic.io/apps/63957feafbe52cdbad81d0fd/android/status_badge.svg)](https://codemagic.io/apps/63957feafbe52cdbad81d0fd/android/latest_build)
 
 ---
+## Screenshot CI & Firebase
+
+| CI Codemagic | Firebase |
+|![ss_ci](./screenshot/ss_ci.png)|![ss_firebase](./screenshot/ss_firebase.png)|
+
+
+---
 
 run in VSCode/Android Studio or use the following commands:
 
