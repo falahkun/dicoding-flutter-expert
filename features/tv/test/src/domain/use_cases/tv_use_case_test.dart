@@ -120,4 +120,16 @@ void main() {
     verify(() => mockTvRepository.saveTvWatchlist(testTvDetail));
     expect(result, Right('Added to Watchlist'));
   });
+
+  test('is added to watchlist', () async {
+    // arrange
+    when(() => mockTvRepository.isAddedToWatchlist(tId))
+        .thenAnswer((_) async => true);
+    // act
+    final result = await useCase.isAddedToWatchlist(tId);
+    // assert
+    verify(() => mockTvRepository.isAddedToWatchlist(tId));
+    expect(result, true);
+  });
+
 }

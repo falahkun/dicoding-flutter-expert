@@ -102,9 +102,9 @@ Future<void> setUpLocator() async {
 
 Future<void> _setUpCore() async {
   getIt.registerFactory<DatabaseHelper>(() => DatabaseHelper());
-  HttpClient client = HttpClient(context: await globalContext);
-  client.badCertificateCallback =
-      (X509Certificate cert, String host, int port) => false;
+  HttpClient client = HttpClient(context: await globalContext)
+    ..badCertificateCallback =
+        (X509Certificate cert, String host, int port) => false;
   IOClient ioClient = IOClient(client);
   getIt.registerFactory<http.Client>(() => ioClient);
 }

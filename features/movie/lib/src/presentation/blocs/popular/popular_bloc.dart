@@ -1,6 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'dart:async';
+import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:movie/movie.dart';
@@ -21,11 +22,17 @@ class PopularBloc extends Bloc<PopularEvent, PopularState> {
   Future<void> _onGetPopularMovieEvent(
       GetPopularMovieEvent event, Emitter<PopularState> emit) async {
     emit(PopularLoading());
-    final result = await getPopularMovies.execute();
+    try {
+      final result = await getPopularMovies.execute();
 
-    result.fold(
-      (failure) => emit(PopularError(failure.message)),
-      (result) => emit(PopularLoaded(result)),
-    );
+      result.fold(
+            (failure) => emit(PopularError(failure.message)),
+            (result) => emit(PopularLoaded(result)),
+      );
+    } on SocketException {
+      emit(PopularError('connection failed, please try again or update your app!'));
+    } catch (err) {
+      emit(PopularError('something error!'));
+    }
   }
 }

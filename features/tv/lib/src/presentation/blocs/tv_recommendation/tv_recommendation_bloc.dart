@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -19,10 +20,16 @@ class TvRecommendationBloc
   Future<void> _onGetTvRecommendationEvent(GetTvRecommendationEvent event,
       Emitter<TvRecommendationState> emit) async {
     emit(TvRecommendationLoading());
-    final result = await useCase.getTvRecommendations(event.id);
-    result.fold(
-      (l) => emit(TvRecommendationError(l.message)),
-      (result) => emit(TvRecommendationLoaded(result)),
-    );
+    try {
+      final result = await useCase.getTvRecommendations(event.id);
+      result.fold(
+            (l) => emit(TvRecommendationError(l.message)),
+            (result) => emit(TvRecommendationLoaded(result)),
+      );
+    } on SocketException {
+      emit(TvRecommendationError('connection failed, please try again or update your app!'));
+    } catch (err) {
+      emit(TvRecommendationError('something error!'));
+    }
   }
 }

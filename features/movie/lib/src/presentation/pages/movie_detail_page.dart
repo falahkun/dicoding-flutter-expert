@@ -52,7 +52,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
         body: BlocBuilder<MovieDetailBloc, MovieDetailState>(
           builder: (context, state) {
             if (state is MovieDetailError) {
-              return Text(state.message);
+              return Center(child: Text(state.message));
             } else if (state is MovieDetailLoaded) {
               final movie = state.movieDetail;
               return SafeArea(
