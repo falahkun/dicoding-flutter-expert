@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
@@ -20,10 +21,16 @@ class TopRatedBloc extends Bloc<TopRatedEvent, TopRatedState> {
   Future<void> _onGetTopRatedMovieEvent(
       GetTopRatedMovieEvent event, Emitter<TopRatedState> emit) async {
     emit(TopRatedLoading());
-    final result = await getTopRatedMovies.execute();
-    result.fold(
-      (failure) => emit(TopRatedError(failure.message)),
-      (result) => emit(TopRatedLoaded(result)),
-    );
+    try {
+      final result = await getTopRatedMovies.execute();
+      result.fold(
+            (failure) => emit(TopRatedError(failure.message)),
+            (result) => emit(TopRatedLoaded(result)),
+      );
+    } on SocketException {
+      emit(TopRatedError('connection failed, please try again or update your app!'));
+    } catch (err) {
+      emit(TopRatedError('something error!'));
+    }
   }
 }

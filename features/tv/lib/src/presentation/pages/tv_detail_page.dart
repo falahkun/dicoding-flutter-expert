@@ -52,7 +52,7 @@ class _TvDetailPageState extends State<TvDetailPage> {
         child: BlocBuilder<TvDetailBloc, TvDetailState>(
           builder: (context, state) {
             if (state is TvDetailError) {
-              return Text(state.message);
+              return Center(child: Text(state.message));
             } else if (state is TvDetailLoaded) {
               final tv = state.tvDetail;
               return SafeArea(

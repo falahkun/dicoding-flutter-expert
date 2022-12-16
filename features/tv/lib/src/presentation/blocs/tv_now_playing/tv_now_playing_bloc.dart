@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -18,8 +19,14 @@ class TvNowPlayingBloc extends Bloc<TvNowPlayingEvent, TvNowPlayingState> {
   Future<void> _onGetTvNowPlaying(
       GetTvNowPlaying event, Emitter<TvNowPlayingState> emit) async {
     emit(TvNowPlayingLoading());
-    final result = await useCase.getNowPlayingTv();
-    result.fold((failure) => emit(TvNowPlayingError(failure.message)),
-        (result) => emit(TvNowPlayingLoaded(result)));
+    try {
+      final result = await useCase.getNowPlayingTv();
+      result.fold((failure) => emit(TvNowPlayingError(failure.message)),
+              (result) => emit(TvNowPlayingLoaded(result)));
+    } on SocketException {
+      emit(TvNowPlayingError('connection failed, please try again or update your app!'));
+    } catch (err) {
+      emit(TvNowPlayingError('something error!'));
+    }
   }
 }

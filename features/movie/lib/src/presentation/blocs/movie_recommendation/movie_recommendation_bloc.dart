@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
@@ -21,10 +22,16 @@ class MovieRecommendationBloc
   Future<void> _onGetMovieRecommendationEvent(GetMovieRecommendationEvent event,
       Emitter<MovieRecommendationState> emit) async {
     emit(MovieRecommendationLoading());
+    try {
     final result = await getMovieRecommendations.execute(event.id);
     result.fold(
       (failure) => emit(MovieRecommendationError(failure.message)),
       (result) => emit(MovieRecommendationLoaded(result)),
     );
+    } on SocketException {
+      emit(MovieRecommendationError('connection failed, please try again or update your app!'));
+    } catch (err) {
+      emit(MovieRecommendationError('something error!'));
+    }
   }
 }

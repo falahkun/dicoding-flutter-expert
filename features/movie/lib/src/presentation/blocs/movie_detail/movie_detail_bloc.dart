@@ -1,6 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'dart:async';
+import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
@@ -22,10 +23,16 @@ class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
   Future<void> _onGetMovieDetailEvent(
       GetMovieDetailEvent event, Emitter<MovieDetailState> emit) async {
     emit(MovieDetailLoading());
-    final result = await getMovieDetail.execute(event.id);
-    result.fold(
-      (failure) => emit(MovieDetailError(failure.message)),
-      (result) => emit(MovieDetailLoaded(result)),
-    );
+    try {
+      final result = await getMovieDetail.execute(event.id);
+      result.fold(
+            (failure) => emit(MovieDetailError(failure.message)),
+            (result) => emit(MovieDetailLoaded(result)),
+      );
+    } on SocketException {
+      emit(MovieDetailError('connection failed, please try again or update your app!'));
+    } catch (err) {
+      emit(MovieDetailError('something error!'));
+    }
   }
 }
