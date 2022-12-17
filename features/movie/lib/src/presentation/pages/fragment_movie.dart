@@ -36,9 +36,10 @@ class _FragmentMovieState extends State<FragmentMovie> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Now Playing',
-                style: kHeading6,
+              _buildSubHeading(
+                title: 'Now Playing',
+                onTap: () =>
+                    Navigator.pushNamed(context, NamedRoutes.nowPlayingMovie),
               ),
               BlocBuilder<NowPlayingBloc, NowPlayingState>(builder: (_, state) {
                 if (state is NowPlayingError) {
