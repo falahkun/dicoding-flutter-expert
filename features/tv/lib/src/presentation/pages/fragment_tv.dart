@@ -32,10 +32,11 @@ class _FragmentTvState extends State<FragmentTv> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'On The Air',
-                style: kHeading6,
-              ),
+              _buildSubHeading(
+                  title: 'On Air',
+                  onTap: () {
+                    Navigator.pushNamed(context, NamedRoutes.tvOnAir);
+                  }),
               BlocBuilder<TvNowPlayingBloc, TvNowPlayingState>(
                 builder: (_, state) {
                   if (state is TvNowPlayingError) {

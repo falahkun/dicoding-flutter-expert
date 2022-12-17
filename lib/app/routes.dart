@@ -13,6 +13,8 @@ Route routes(RouteSettings settings) {
       return CupertinoPageRoute(builder: (_) => PopularMoviesPage());
     case NamedRoutes.topRatedMovie:
       return CupertinoPageRoute(builder: (_) => TopRatedMoviesPage());
+      case NamedRoutes.nowPlayingMovie:
+      return CupertinoPageRoute(builder: (_) => NowPlayingMoviePage());
     case NamedRoutes.movieDetail:
       final id = settings.arguments as int;
       return MaterialPageRoute(
@@ -31,8 +33,10 @@ Route routes(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => TvDetailPage(id: id));
     case NamedRoutes.popularTv:
       return MaterialPageRoute(builder: (_) => PopularTvPage());
-    case NamedRoutes.topRatedMovie:
+    case NamedRoutes.topRatedTv:
       return MaterialPageRoute(builder: (_) => TopRatedTvPage());
+    case NamedRoutes.tvOnAir:
+      return MaterialPageRoute(builder: (_) => NowPlayingTvPage());
     default:
       return MaterialPageRoute(builder: (_) {
         return Scaffold(
