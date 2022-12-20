@@ -33,7 +33,7 @@ class _FragmentTvState extends State<FragmentTv> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildSubHeading(
-                  title: 'On Air',
+                  title: 'On The Air',
                   onTap: () {
                     Navigator.pushNamed(context, NamedRoutes.tvOnAir);
                   }),

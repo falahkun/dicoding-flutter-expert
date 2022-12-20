@@ -28,12 +28,13 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
   @override
   Widget build(BuildContext context) {
     final isAddedWatchlist = context
-        .select((MovieWatchlistBloc bloc) => bloc.state.isWatchlistExists);
+        .select((MovieWatchlistBloc bloc) => bloc.state);
     return BlocListener<WatchlistMovieBloc, WatchlistMovieState>(
       listener: (context, state) {
+        print(state);
         if (state is WatchlistMovieSuccess) {
           context.read<MovieWatchlistBloc>().add(MovieWatchlistEvent(widget.id));
-          if (isAddedWatchlist) {
+          if (isAddedWatchlist.isWatchlistExists) {
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                 key:  Key('success_snackBar'),
                 content: Text('Success, Movie removed from Watchlist')));
@@ -43,6 +44,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                 content: Text('Success, Movie added to Watchlist')));
           }
         } else if (state is WatchlistMovieError) {
+          print(state.message);
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               key: const Key('error_snackBar'),
               content: Text(state.message)));
@@ -122,12 +124,10 @@ class DetailContent extends StatelessWidget {
                             ElevatedButton(
                               onPressed: () async {
                                 if (!isAddedWatchlist) {
-                                  AnalyticsHelper.log('SaveMovieToWatchlist', movie);
                                   context
                                       .read<WatchlistMovieBloc>()
                                       .add(SaveMovieToWatchlist(movie));
                                 } else {
-                                  AnalyticsHelper.log('RemoveMovieFromWatchlist', movie);
                                   context
                                       .read<WatchlistMovieBloc>()
                                       .add(RemoveMovieFromWatchlist(movie));

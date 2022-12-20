@@ -1,8 +1,11 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:home/home.dart';
 import 'package:movie/movie.dart';
 import 'package:tv/tv.dart';
+import 'package:core/core.dart';
 
 import '../fragment/fragment_list.dart';
 
@@ -15,14 +18,30 @@ class WatchlistPage extends StatefulWidget {
   _WatchlistPageState createState() => _WatchlistPageState();
 }
 
-class _WatchlistPageState extends State<WatchlistPage> {
-
+class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
   int selectedIndex = 0;
 
   @override
   void initState() {
     super.initState();
-    context.read<WatchlistBloc>().add(WatchlistEvent());
+    context.read<WatchlistBloc>().add(const WatchlistEvent());
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    routeObserver.subscribe(this, ModalRoute.of(context)!);
+  }
+
+  @override
+  void didPopNext() {
+    context.read<WatchlistBloc>().add(const WatchlistEvent());
+  }
+
+  @override
+  void dispose() {
+    routeObserver.unsubscribe(this);
+    super.dispose();
   }
 
   @override
@@ -31,10 +50,14 @@ class _WatchlistPageState extends State<WatchlistPage> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Watchlist'),
-          bottom: TabBar(tabs: [
-            Tab(child: Text("Movies"),),
-            Tab(child: Text("Tv"),),
+          title: const Text('Watchlist'),
+          bottom: TabBar(tabs: const [
+            Tab(
+              child: Text("Movies"),
+            ),
+            Tab(
+              child: Text("Tv"),
+            ),
           ], onTap: (value) => setState(() => selectedIndex = value)),
         ),
         body: BlocBuilder<WatchlistBloc, WatchlistState>(
@@ -57,11 +80,10 @@ class _WatchlistPageState extends State<WatchlistPage> {
                 ),
               );
             } else if (state is WatchlistLoading) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else {
-              return SizedBox();
+              return const SizedBox();
             }
-
           },
         ),
       ),
