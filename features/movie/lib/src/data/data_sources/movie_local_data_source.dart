@@ -1,4 +1,6 @@
 
+import 'dart:developer';
+
 import 'package:core/core.dart';
 import 'package:movie/movie.dart';
 
@@ -23,6 +25,7 @@ class MovieLocalDataSourceImpl implements MovieLocalDataSource {
       await localMovieDatabase.insert(movie);
       return 'Added to Watchlist';
     } catch (e) {
+      log('onInsertError($e)');
       throw DatabaseException(e.toString());
     }
   }

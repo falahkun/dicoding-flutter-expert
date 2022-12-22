@@ -25,7 +25,7 @@ class WatchlistMovieBloc
 
   Future<void> _onSaveMovieToWatchlist(
       SaveMovieToWatchlist event, Emitter<WatchlistMovieState> emit) async {
-    // emit(WatchlistMovieLoading());
+    emit(WatchlistMovieLoading());
     final result = await saveWatchlist.execute(event.movie);
     result.fold(
       (failure) => emit(WatchlistMovieError(failure.message)),
@@ -35,7 +35,7 @@ class WatchlistMovieBloc
 
   Future<void> _onRemoveMovieFromWatchlist(
       RemoveMovieFromWatchlist event, Emitter<WatchlistMovieState> emit) async {
-    // emit(WatchlistMovieLoading());
+    emit(WatchlistMovieLoading());
     final result = await removeWatchlist.execute(event.movie);
     result.fold(
       (failure) => emit(WatchlistMovieError(failure.message)),

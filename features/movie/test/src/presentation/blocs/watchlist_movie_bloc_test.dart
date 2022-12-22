@@ -81,7 +81,7 @@ void main() {
       },
       act: (bloc) => bloc.add(SaveMovieToWatchlist(testMovieDetail)),
       expect: () => [
-        // WatchlistMovieLoading(),
+        WatchlistMovieLoading(),
         WatchlistMovieSuccess(),
       ],
     );
@@ -97,7 +97,7 @@ void main() {
       },
       act: (bloc) => bloc.add(SaveMovieToWatchlist(testMovieDetail)),
       expect: () => [
-        // WatchlistMovieLoading(),
+        WatchlistMovieLoading(),
         WatchlistMovieError('movie already exists'),
       ],
     );
@@ -114,7 +114,7 @@ void main() {
       },
       act: (bloc) => bloc.add(RemoveMovieFromWatchlist(testMovieDetail)),
       expect: () => [
-        // WatchlistMovieLoading(),
+        WatchlistMovieLoading(),
         WatchlistMovieSuccess(),
       ],
     );
@@ -130,7 +130,7 @@ void main() {
       },
       act: (bloc) => bloc.add(RemoveMovieFromWatchlist(testMovieDetail)),
       expect: () => [
-        // WatchlistMovieLoading(),
+        WatchlistMovieLoading(),
         WatchlistMovieError("movie doesn't exists"),
       ],
     );
