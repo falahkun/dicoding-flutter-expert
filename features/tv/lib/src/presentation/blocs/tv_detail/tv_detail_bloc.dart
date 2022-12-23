@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
@@ -28,6 +29,7 @@ class TvDetailBloc extends Bloc<TvDetailEvent, TvDetailState> {
     } on SocketException {
       emit(TvDetailError('connection failed, please try again or update your app!'));
     } catch (err) {
+      log('onCatchError($err)');
       emit(TvDetailError('something error!'));
     }
   }
